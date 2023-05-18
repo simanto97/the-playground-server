@@ -28,8 +28,21 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
 
+    const indexKeys = { toy_name: 1 };
+    const indexOptions = { name: "toyName" };
+    const result = await carsCollection.createIndex(indexKeys, indexOptions);
+    app.get("/carSearchByToyName/:text", async (req, res) => {
+      const searchText = req.params.text;
+      const result = await carsCollection
+        .find({
+          $or: [{ toy_name: { $regex: searchText, $options: "i" } }],
+        })
+        .toArray();
+      res.send(result);
+    });
+
     app.get("/all-toys", async (req, res) => {
-      const cursor = carsCollection.find();
+      const cursor = carsCollection.find().limit(20);
       const result = await cursor.toArray();
       res.send(result);
     });
