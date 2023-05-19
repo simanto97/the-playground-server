@@ -71,10 +71,24 @@ async function run() {
       const result = await cursor.toArray();
       res.send(result);
     });
+    app.get("/my-toys/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { seller_email: email };
+      const cursor = carsCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
 
     app.post("/add-toy", async (req, res) => {
       const car = req.body;
       const result = await carsCollection.insertOne(car);
+      res.send(result);
+    });
+
+    app.delete("/my-toys/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await carsCollection.deleteOne(query);
       res.send(result);
     });
 
