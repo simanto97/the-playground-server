@@ -85,6 +85,30 @@ async function run() {
       res.send(result);
     });
 
+    app.put("/update-toy/:id", async (req, res) => {
+      const id = req.params.id;
+      const body = req.body;
+      const option = {
+        upsert: true,
+      };
+      const filter = { _id: new ObjectId(id) };
+      const toyData = {
+        $set: {
+          image: body.image,
+          toy_name: body.toy_name,
+          seller_name: body.seller_name,
+          seller_email: body.seller_email,
+          sub_category: body.sub_category,
+          price: body.price,
+          rating: body.rating,
+          available_quantity: body.available_quantity,
+          description: body.description,
+        },
+      };
+      const result = await carsCollection.updateOne(filter, toyData, option);
+      res.send(result);
+    });
+
     app.delete("/my-toys/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
