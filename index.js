@@ -9,8 +9,7 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors());
 
-// assignment-11
-// Ff11pONh9MC1h5jX
+const customers = require("./data/customers.json");
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.vqdm4bk.mongodb.net/?retryWrites=true&w=majority`;
 
@@ -26,7 +25,7 @@ const carsCollection = client.db("carToys").collection("cars");
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+    client.connect();
 
     const indexKeys = { toy_name: 1 };
     const indexOptions = { name: "toyName" };
@@ -62,6 +61,12 @@ async function run() {
     app.get("/sports-car", async (req, res) => {
       const query = { sub_category: "Sports Car" };
       const cursor = carsCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+    app.get("/new-addition", async (req, res) => {
+      const query = { sub_category: "Sports Car" };
+      const cursor = carsCollection.find(query).limit(5);
       const result = await cursor.toArray();
       res.send(result);
     });
@@ -127,6 +132,10 @@ async function run() {
   }
 }
 run().catch(console.dir);
+
+app.get("/customers", (req, res) => {
+  res.send(customers);
+});
 
 app.get("/", (req, res) => {
   res.send("Assignment 11 server is running");

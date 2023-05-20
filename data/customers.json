@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "photo": "https://randomuser.me/api/portraits/men/72.jpg",
+    "name": "John Smith",
+    "location": "New York, USA",
+    "feedback": "Great selection of toys and excellent customer service."
+  },
+  {
+    "id": 2,
+    "photo": "https://randomuser.me/api/portraits/men/86.jpg",
+    "name": "Emily Johnson",
+    "location": "London, UK",
+    "feedback": "I love shopping at Toy Marketplace. The quality of their..."
+  },
+  {
+    "id": 3,
+    "photo": "https://randomuser.me/api/portraits/women/53.jpg",
+    "name": "Maria Rodriguez",
+    "location": "Madrid, Spain",
+    "feedback": "As a parent, I appreciate the educational toys available..."
+  },
+  {
+    "id": 4,
+    "photo": "https://randomuser.me/api/portraits/women/33.jpg",
+    "name": "Hiroshi Tanaka",
+    "location": "Tokyo, Japan",
+    "feedback": "Toy Marketplace offers a wide range of toys from different..."
+  },
+  {
+    "id": 5,
+    "photo": "https://randomuser.me/api/portraits/men/52.jpg",
+    "name": "Sophie Dubois",
+    "location": "Paris, France",
+    "feedback": "The website is user-friendly, and the shipping is fast."
+  }
+]
