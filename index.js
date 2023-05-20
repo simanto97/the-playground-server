@@ -86,6 +86,9 @@ async function run() {
 
     app.post("/add-toy", async (req, res) => {
       const car = req.body;
+      car.price = parseFloat(req.body.price);
+      car.rating = parseFloat(req.body.rating);
+      car.available_quantity = parseFloat(req.body.available_quantity);
       const result = await carsCollection.insertOne(car);
       res.send(result);
     });
@@ -93,6 +96,9 @@ async function run() {
     app.put("/update-toy/:id", async (req, res) => {
       const id = req.params.id;
       const body = req.body;
+      body.price = parseFloat(req.body.price);
+      body.rating = parseFloat(req.body.rating);
+      body.available_quantity = parseFloat(req.body.available_quantity);
       const option = {
         upsert: true,
       };
