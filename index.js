@@ -79,7 +79,21 @@ async function run() {
     app.get("/my-toys/:email", async (req, res) => {
       const email = req.params.email;
       const query = { seller_email: email };
+      const cursor = carsCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+    app.get("/my-toys/ascending/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { seller_email: email };
       const cursor = carsCollection.find(query).sort({ price: 1 });
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+    app.get("/my-toys/descending/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { seller_email: email };
+      const cursor = carsCollection.find(query).sort({ price: -1 });
       const result = await cursor.toArray();
       res.send(result);
     });
