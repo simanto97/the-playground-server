@@ -52,27 +52,20 @@ async function run() {
       const result = await cursor.toArray();
       res.send(result);
     });
-    app.get("/regular-cars", async (req, res) => {
-      const query = { sub_category: "Regular Cars" };
-      const cursor = carsCollection.find(query);
-      const result = await cursor.toArray();
+
+    app.get("/sub-categories", async (req, res) => {
+      console.log(req.query);
+      let query = {};
+      if (req.query?.category) {
+        query = { sub_category: req.query.category };
+      }
+      const result = await carsCollection.find(query).toArray();
       res.send(result);
     });
-    app.get("/sports-car", async (req, res) => {
-      const query = { sub_category: "Sports Car" };
-      const cursor = carsCollection.find(query);
-      const result = await cursor.toArray();
-      res.send(result);
-    });
+
     app.get("/new-addition", async (req, res) => {
       const query = { sub_category: "Sports Car" };
       const cursor = carsCollection.find(query).limit(5);
-      const result = await cursor.toArray();
-      res.send(result);
-    });
-    app.get("/fire-trucks", async (req, res) => {
-      const query = { sub_category: "Mini Fire Trucks" };
-      const cursor = carsCollection.find(query);
       const result = await cursor.toArray();
       res.send(result);
     });
